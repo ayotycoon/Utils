@@ -1,8 +1,7 @@
 function fillform(elements, isInput) {
   const samples = {
-    name: ["Ayo", "Ukeme", "Tobi", "Abasi"],
+    name: ["Blessing", "Emmanuel", "favour", "Michael", "Esther", "samuel", "precious", "Kingsley", "Joy", "DANIEL", "Victoria", "Victor", "chinelo", "Williams", "Ayomide", "Charles", "Margaret", "Prince", "Queen", "gabriel", "olabisi", "Isaac", "kebe", "Sam", "Mary", "Peter", "Grace", "IDRIS", "Hellen", "paul", "dorcas", "azeez", "Diana", "John", "Kelechi", "Adewale", "mercy", "stephen", "Pollyanna", "Muhammed", "Marvellous", "Walter", "rhamat", "SOLOMON", "DIVINE", "Raphael", "katrine", "Francis", "Patricia", "kelvin", "anna", "vincent", "joycee", "chidi", "tinah", "Israel", "Ralia", "David", "Vivian", "Joseph", "Nzube", "Richard", "Abigail", "sodiq", "Mietra", "Maxwell", "Amala", "MASTER LIGHT", "Tife", "johnny", "racheal", "Akinola", "Uche", "Emmy", "Temitope", "Promise", "LILLIE", "bobby", "Iyanuoluwa", "Sadic", "Laye", "honey", "Jasmine", "wisdom", "Weneydarl", "Mark", "Marie", "ebuka", "Gabriel", "Tomiwa", "benita", "mubaraq", "ajigbotoso", "oladimeji", "Gloria", "thankGod EYE", "Justin", "chimee", "Enny", "Godson","Ayo", "Ukeme", "Tobi", "Abasi"],
     phonePrefix: ["081", "080", "070", "090"],
-    email: ["sample@hh.com", "a@abc.com", "test@bb.com"],
     address: ["1, tempmail street"],
     landmark: ["ikeja city mall"],
     job: ["farmer", "hunter", "programmer"],
@@ -52,11 +51,16 @@ function fillform(elements, isInput) {
   const interceptor = (element, isInput) => {
       element.setAttribute('changed', 'true')
 
-      let event = new Event("change");
+      let events = [new Event("change")];
       if (isInput) {
-        event = new Event("input");
+        events.push(new Event("input"));
+        events.push(new Event("blur"));
+      
+   
+   
+       
       }
-      element.dispatchEvent(event);
+      events.forEach(event =>  element.dispatchEvent(event))
   
   };
   // 2020-02-20
@@ -96,7 +100,7 @@ function fillform(elements, isInput) {
     // checking input type
     switch (elementType) {
       case "email":
-        element.value = randomizer("email");
+        element.value = `${randomizer("name")}@${randomizer("name")}mail.com`;
         set = true;
         return;
       case "number":
