@@ -76,7 +76,10 @@ function fillform(elements, isInput) {
       if (/email/i.test(_text)) {
         element.value = randomizer("email");
         set = true;
-      } else if (/(phone)|(bvn)/i.test(_text)) {
+      } else if (/(zip)|(bvn)/i.test(_text)) {
+        element.value = numberGen(100 ,300, true);
+        set = true;
+      } else if (/(phone)/i.test(_text)) {
         element.value = phoneGen();
         set = true;
       } else if (/fullname/i.test(_text)) {
