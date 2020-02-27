@@ -220,7 +220,7 @@ function fillform(elements, isInput) {
 }
 function findInput() {
   const selectElements = document.querySelectorAll("select");
-  const inputElements = document.querySelectorAll("input");
+  const inputElements = document.querySelectorAll("input,textarea");
   console.log("here");
 
   fillform(selectElements, false);
