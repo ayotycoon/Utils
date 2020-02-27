@@ -1,21 +1,24 @@
 {
   "manifest_version": 2,
   "name": "Auto filler",
-  "version": "1.0",
+  "version": "0.1",
+  "permissions": [
+    "activeTab",
+    "<all_urls>"
+    ],
   "content_scripts": [
     {
       "matches": [
         "<all_urls>"
       ],
-      "js": ["index.js"]
+      "js": ["index.js", "formfiller.js"]
     }
     
   ],
-  "permissions": [
-    "activeTab"
-    ],
+
   "browser_action": {
-    "default_icon": "icon.png"
+    "default_icon": "icon.png",
+    "default_popup": "index.html"
   }
 }
 
