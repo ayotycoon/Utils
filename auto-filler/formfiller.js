@@ -105,8 +105,9 @@ function fillform(elements, isInput) {
         return;
       case "number":
         element.value = numberGen(
-          element.getAttribute("min") || 0,
-          element.getAttribute("max") || 1
+          element.getAttribute("min") || 2,
+          element.getAttribute("max") || 10
+          ,true
         );
         set = true;
         return;
