@@ -196,7 +196,7 @@ function fillform(elements, isInput) {
         element.value = phoneGen();
         set = true;
       } else if (/(price)|(cost)|(money)|(naira)/i.test(_text)) {
-        element.value = numberGen(100,3000,true) + '.' .numberGen(0,2);
+        element.value = numberGen(100,3000,true) + '.' + numberGen(0,2);
         set = true;
       } else if (/full\s*?name/i.test(_text)) {
         element.value = `${randomizer("name")} ${randomizer("name")}`;
