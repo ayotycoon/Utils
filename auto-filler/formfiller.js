@@ -169,7 +169,8 @@ function fillform(elements, isInput) {
         new Event("click")
       ];
     }
-    events.forEach(event => element.dispatchEvent(event));
+    setTimeout(()=>  events.forEach(event => element.dispatchEvent(event)), 200)
+  
   };
   // 2020-02-20
   const inputEngine = element => {
