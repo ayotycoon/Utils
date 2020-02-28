@@ -1,11 +1,13 @@
+let changedInputs = 0
 function fillform(elements, isInput) {
+  changedInputs ++;
   const samples = {
     name: ["Blessing", "Emmanuel", "favour", "Michael", "Esther", "samuel", "precious", "Kingsley", "Joy", "DANIEL", "Victoria", "Victor", "chinelo", "Williams", "Ayomide", "Charles", "Margaret", "Prince", "Queen", "gabriel", "olabisi", "Isaac", "kebe", "Sam", "Mary", "Peter", "Grace", "IDRIS", "Hellen", "paul", "dorcas", "azeez", "Diana", "John", "Kelechi", "Adewale", "mercy", "stephen", "Pollyanna", "Muhammed", "Marvellous", "Walter", "rhamat", "SOLOMON", "DIVINE", "Raphael", "katrine", "Francis", "Patricia", "kelvin", "anna", "vincent", "joycee", "chidi", "tinah", "Israel", "Ralia", "David", "Vivian", "Joseph", "Nzube", "Richard", "Abigail", "sodiq", "Mietra", "Maxwell", "Amala", "MASTER LIGHT", "Tife", "johnny", "racheal", "Akinola", "Uche", "Emmy", "Temitope", "Promise", "LILLIE", "bobby", "Iyanuoluwa", "Sadic", "Laye", "honey", "Jasmine", "wisdom", "Weneydarl", "Mark", "Marie", "ebuka", "Gabriel", "Tomiwa", "benita", "mubaraq", "ajigbotoso", "oladimeji", "Gloria", "thankGod EYE", "Justin", "chimee", "Enny", "Godson","Ayo", "Ukeme", "Tobi", "Abasi"],
     phonePrefix: ["081", "080", "070", "090"],
     address: ["1, tempmail street"],
     landmark: ["ikeja city mall"],
     job: ["farmer", "hunter", "programmer"],
-    others: ["abcccc", "efgggggg", "otherss"]
+    others: ["Could not guess field", "Others1", "otherss"]
   };
 
   const randomizer = type => {
@@ -55,12 +57,13 @@ function fillform(elements, isInput) {
       if (isInput) {
         events.push(new Event("input"));
         events.push(new Event("blur"));
+        events.push(new Event("click"));
       
    
    
        
       }
-      events.forEach(event =>  element.dispatchEvent(event))
+      events.forEach(event => setTimeout(() => element.dispatchEvent(event), 100))
   
   };
   // 2020-02-20
@@ -224,7 +227,8 @@ function fillform(elements, isInput) {
 function findInput() {
   const selectElements = document.querySelectorAll("select");
   const inputElements = document.querySelectorAll("input,textarea");
-  console.log("here");
+
+  console.log(changedInputs + ' inputs changed')
 
   fillform(selectElements, false);
   fillform(inputElements, true);
