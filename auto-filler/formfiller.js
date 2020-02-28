@@ -1,8 +1,115 @@
-let changedInputs = 0
+let changedInputs = 0;
 function fillform(elements, isInput) {
-  changedInputs ++;
+  changedInputs++;
+  //full name
+  //fullname
   const samples = {
-    name: ["Blessing", "Emmanuel", "favour", "Michael", "Esther", "samuel", "precious", "Kingsley", "Joy", "DANIEL", "Victoria", "Victor", "chinelo", "Williams", "Ayomide", "Charles", "Margaret", "Prince", "Queen", "gabriel", "olabisi", "Isaac", "kebe", "Sam", "Mary", "Peter", "Grace", "IDRIS", "Hellen", "paul", "dorcas", "azeez", "Diana", "John", "Kelechi", "Adewale", "mercy", "stephen", "Pollyanna", "Muhammed", "Marvellous", "Walter", "rhamat", "SOLOMON", "DIVINE", "Raphael", "katrine", "Francis", "Patricia", "kelvin", "anna", "vincent", "joycee", "chidi", "tinah", "Israel", "Ralia", "David", "Vivian", "Joseph", "Nzube", "Richard", "Abigail", "sodiq", "Mietra", "Maxwell", "Amala", "MASTER LIGHT", "Tife", "johnny", "racheal", "Akinola", "Uche", "Emmy", "Temitope", "Promise", "LILLIE", "bobby", "Iyanuoluwa", "Sadic", "Laye", "honey", "Jasmine", "wisdom", "Weneydarl", "Mark", "Marie", "ebuka", "Gabriel", "Tomiwa", "benita", "mubaraq", "ajigbotoso", "oladimeji", "Gloria", "thankGod EYE", "Justin", "chimee", "Enny", "Godson","Ayo", "Ukeme", "Tobi", "Abasi"],
+    name: [
+      "Blessing",
+      "Emmanuel",
+      "favour",
+      "Michael",
+      "Esther",
+      "samuel",
+      "precious",
+      "Kingsley",
+      "Joy",
+      "DANIEL",
+      "Victoria",
+      "Victor",
+      "chinelo",
+      "Williams",
+      "Ayomide",
+      "Charles",
+      "Margaret",
+      "Prince",
+      "Queen",
+      "gabriel",
+      "olabisi",
+      "Isaac",
+      "kebe",
+      "Sam",
+      "Mary",
+      "Peter",
+      "Grace",
+      "IDRIS",
+      "Hellen",
+      "paul",
+      "dorcas",
+      "azeez",
+      "Diana",
+      "John",
+      "Kelechi",
+      "Adewale",
+      "mercy",
+      "stephen",
+      "Pollyanna",
+      "Muhammed",
+      "Marvellous",
+      "Walter",
+      "rhamat",
+      "SOLOMON",
+      "DIVINE",
+      "Raphael",
+      "katrine",
+      "Francis",
+      "Patricia",
+      "kelvin",
+      "anna",
+      "vincent",
+      "joycee",
+      "chidi",
+      "tinah",
+      "Israel",
+      "Ralia",
+      "David",
+      "Vivian",
+      "Joseph",
+      "Nzube",
+      "Richard",
+      "Abigail",
+      "sodiq",
+      "Mietra",
+      "Maxwell",
+      "Amala",
+      "MASTERLIGHT",
+      "Tife",
+      "johnny",
+      "racheal",
+      "Akinola",
+      "Uche",
+      "Emmy",
+      "Temitope",
+      "Promise",
+      "LILLIE",
+      "bobby",
+      "Iyanuoluwa",
+      "Sadic",
+      "Laye",
+      "honey",
+      "Jasmine",
+      "wisdom",
+      "Weneydarl",
+      "Mark",
+      "Marie",
+      "ebuka",
+      "Gabriel",
+      "Tomiwa",
+      "benita",
+      "mubaraq",
+      "ajigbotoso",
+      "oladimeji",
+      "Gloria",
+      "thankGodEYE",
+      "Justin",
+      "chimee",
+      "Enny",
+      "Godson",
+      "Ayo",
+      "Ukeme",
+      "Tobi",
+      "Abasi"
+    ],
     phonePrefix: ["081", "080", "070", "090"],
     address: ["1, tempmail street"],
     landmark: ["ikeja city mall"],
@@ -13,7 +120,7 @@ function fillform(elements, isInput) {
   const randomizer = type => {
     const typeLength = samples[type].length;
     const index = Math.floor(Math.random() * typeLength);
-    return samples[type][index] || "";
+    return samples[type][index].toLowerCase() || "";
   };
   const numberGen = (min, max, literial) => {
     min = parseInt(min);
@@ -51,20 +158,18 @@ function fillform(elements, isInput) {
     return date;
   };
   const interceptor = (element, isInput) => {
-      element.setAttribute('changed', 'true')
+    element.setAttribute("changed", "true");
 
-      let events = [new Event("change")];
-      if (isInput) {
-        events.push(new Event("input"));
-        events.push(new Event("blur"));
-        events.push(new Event("click"));
-      
-   
-   
-       
-      }
-      events.forEach(event => setTimeout(() => element.dispatchEvent(event), 100))
-  
+    let events = [new Event("change")];
+    if (isInput) {
+      events = [
+        ...events,
+        new Event("input"),
+        new Event("blur"),
+        new Event("click")
+      ];
+    }
+    events.forEach(event => element.dispatchEvent(event));
   };
   // 2020-02-20
   const inputEngine = element => {
@@ -77,15 +182,15 @@ function fillform(elements, isInput) {
 
     function test(_text) {
       if (/email/i.test(_text)) {
-        element.value = randomizer("email");
+        element.value = `${randomizer("name")}@${randomizer("name")}mail.com`
         set = true;
       } else if (/(zip)|(bvn)/i.test(_text)) {
-        element.value = numberGen(100 ,300, true);
+        element.value = numberGen(100, 300, true);
         set = true;
       } else if (/(phone)/i.test(_text)) {
         element.value = phoneGen();
         set = true;
-      } else if (/fullname/i.test(_text)) {
+      } else if (/full\s*?name/i.test(_text)) {
         element.value = `${randomizer("name")} ${randomizer("name")}`;
         set = true;
       } else if (/name/i.test(_text)) {
@@ -112,8 +217,8 @@ function fillform(elements, isInput) {
       case "number":
         element.value = numberGen(
           element.getAttribute("min") || 1,
-          element.getAttribute("max") || 10
-          ,true
+          element.getAttribute("max") || 10,
+          true
         );
         set = true;
         return;
@@ -194,17 +299,17 @@ function fillform(elements, isInput) {
     delete samples[n];
   };
 
-
-
-
   if (isInput) {
     for (let i = 0; i < elements.length; i++) {
       const element = elements[i];
 
-      if (element.getAttribute("disabled") || element.getAttribute("disabled") == "") {
+      if (
+        element.getAttribute("disabled") ||
+        element.getAttribute("disabled") == ""
+      ) {
         continue;
       }
-      
+
       inputEngine(element);
     }
   } else {
@@ -212,28 +317,26 @@ function fillform(elements, isInput) {
     for (let i = 0; i < elements.length; i++) {
       const element = elements[i];
 
-      if (element.getAttribute("disabled") || element.getAttribute("disabled") == "") {
+      if (
+        element.getAttribute("disabled") ||
+        element.getAttribute("disabled") == ""
+      ) {
         continue;
       }
 
-   
       selectEngine(element, element.name);
     }
   }
-
-
-
 }
 function findInput() {
+
   const selectElements = document.querySelectorAll("select");
   const inputElements = document.querySelectorAll("input,textarea");
 
-  console.log(changedInputs + ' inputs changed')
+  console.log(changedInputs + " inputs changed");
 
   fillform(selectElements, false);
   fillform(inputElements, true);
 }
 
-function findLeftOutElements () {
-
-}
+function findLeftOutElements() {}
