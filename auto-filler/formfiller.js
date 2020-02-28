@@ -147,15 +147,17 @@ function fillform(elements, isInput) {
   const phoneGen = () => {
     return randomizer("phonePrefix") + numberGen(0, 8);
   };
-  const dateGen = () => {
+  const dateGen = isMonth => {
     const year = numberGen(1970, 2090, true);
     const month = numberGen(1, 12, true);
     const day = numberGen(1, 29, true);
 
-    const date = `${year}-${month < 10 ? "0" + month : month}-${
+    const fullDate = `${year}-${month < 10 ? "0" + month : month}-${
       day < 10 ? "0" + day : day
     }`;
-    return date;
+    const monthAndYear = `${year}-${month < 10 ? "0" + month : month}`;
+
+    return isMonth ? monthAndYear : fullDate;
   };
   const interceptor = (element, isInput) => {
     element.setAttribute("changed", "true");
@@ -169,8 +171,10 @@ function fillform(elements, isInput) {
         new Event("click")
       ];
     }
-    setTimeout(()=>  events.forEach(event => element.dispatchEvent(event)), 200)
-  
+    setTimeout(
+      () => events.forEach(event => element.dispatchEvent(event)),
+      200
+    );
   };
   // 2020-02-20
   const inputEngine = element => {
@@ -183,13 +187,16 @@ function fillform(elements, isInput) {
 
     function test(_text) {
       if (/email/i.test(_text)) {
-        element.value = `${randomizer("name")}@${randomizer("name")}mail.com`
+        element.value = `${randomizer("name")}@${randomizer("name")}mail.com`;
         set = true;
       } else if (/(zip)|(bvn)/i.test(_text)) {
         element.value = numberGen(100, 300, true);
         set = true;
       } else if (/(phone)/i.test(_text)) {
         element.value = phoneGen();
+        set = true;
+      } else if (/(price)|(cost)|(money)|(naira)/i.test(_text)) {
+        element.value = numberGen(100,3000,true) + '.' .numberGen(0,2);
         set = true;
       } else if (/full\s*?name/i.test(_text)) {
         element.value = `${randomizer("name")} ${randomizer("name")}`;
@@ -225,6 +232,10 @@ function fillform(elements, isInput) {
         return;
       case "date":
         element.value = dateGen();
+        set = true;
+        return;
+      case "month":
+        element.value = dateGen(true);
         set = true;
         return;
       case "file":
@@ -273,8 +284,8 @@ function fillform(elements, isInput) {
 
     // use placeholder
     if (elementPlaceholder) {
-      element.value = elementPlaceholder;
-      set = true;
+      test(elementPlaceholder);
+      
     }
     if (set) {
       return;
@@ -330,7 +341,6 @@ function fillform(elements, isInput) {
   }
 }
 function findInput() {
-
   const selectElements = document.querySelectorAll("select");
   const inputElements = document.querySelectorAll("input,textarea");
 
